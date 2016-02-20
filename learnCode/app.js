@@ -32,6 +32,7 @@ if (Meteor.isClient) {
 
             $scope.searchTech = function(url) {
                 Meteor.call('searchTech', url, function(results) {
+                    console.log(results);
                     if ('apps' in results) {
                         _.forEach(results['apps'], function(app) {
                             $scope.results.push(app);
@@ -52,9 +53,10 @@ if (Meteor.isServer) {
         searchTech: function(url) {
             var options = {
                 url: url,
-                debug: false,
+                debug: true,
             };
             var result = {};
+            console.log(options);
             wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
                 console.log(apps);
                 console.log(appInfo);
