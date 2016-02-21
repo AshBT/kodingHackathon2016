@@ -22,3 +22,6 @@ meteorhacks:npm
 
 npm-container
 angularui:angular-ui-router
+meteorhacks:async
+okgrow:promise
+mrt:q
