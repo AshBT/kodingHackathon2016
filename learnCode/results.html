@@ -3,11 +3,11 @@
 </header> -->
 <div ng-if="!valid">
     <h1 class="results-header" style="font-family: medLato;">
-        <a href="http://{{url}}">{{url}}</a> is built with proprietary technologies including HTML, CSS and Javascript.
+        <a href="http://{{url}}" target="_blank">{{url}}</a> is built with proprietary technologies including HTML, CSS and Javascript.
     </h1>
     <div class="tech-margins">
         <p class="tech-header">
-            Best way to build <a href="http://{{url}}">{{url}}</a>? Start by learning these foundational skills!
+            Best way to build <a href="http://{{url}}" target="_blank">{{url}}</a>? Start by learning these foundational skills!
         </p>
         <div class="bordered-box">
             <div class="panel panel-group panel-success">
@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="content">
                             <div class="content-inner">
-                                <a href="https://www.codeschool.com/learn/html-css">
+                                <a href="https://www.codeschool.com/learn/html-css" target="_blank">
                                     <h4 class="course-title">HTML/CSS Path</h4>
                                 </a>
                                 <p class="course-description">Learn the fundamentals of design, front-end development, and crafting user experiences that are easy on the eyes.</p>
@@ -32,7 +32,7 @@
                     <div class="panel-body">
                         <div class="content">
                             <div class="content-inner">
-                                <a href="https://www.codeschool.com/learn/javascript">
+                                <a href="https://www.codeschool.com/learn/javascript" target="_blank">
                                     <h4 class="course-title">JavaScript Path</h4>
                                 </a>
                                 <p class="course-description">Spend some time with this powerful scripting language and learn to build lightweight applications with enhanced user interfaces.</p>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com">CodeSchool.com</a>
+                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com" target="_blank">CodeSchool.com</a>
                 </div>
             </div>
         </div>
@@ -52,10 +52,10 @@
 </div>
 <div ng-if="valid">
     <h1 class="results-header">Learn How to Build
-        <a href="http://{{url}}">{{url}}</a>
+        <a href="http://{{url}}" target="_blank">{{url}}</a>
     </h1>
     <div class="tech-margins">
-        <p class="tech-header">These are the basic skills you need to build <a href="http://{{url}}">{{url}}:</a>
+        <p class="tech-header">These are courses you can take to build the basic skills for <a href="http://{{url}}" target="_blank">{{url}}:</a>
         </p>
         <div class="bordered-box">
             <div class="panel panel-group panel-success">
@@ -64,7 +64,7 @@
                     <div class="panel-body">
                         <div class="content">
                             <div class="content-inner">
-                                <a href="https://www.codeschool.com/learn/html-css">
+                                <a href="https://www.codeschool.com/learn/html-css" target="_blank">
                                     <h4 class="course-title">HTML/CSS Path</h4>
                                 </a>
                                 <p class="course-description">Learn the fundamentals of design, front-end development, and crafting user experiences that are easy on the eyes.</p>
@@ -80,7 +80,7 @@
                     <div class="panel-body">
                         <div class="content">
                             <div class="content-inner">
-                                <a href="https://www.codeschool.com/learn/javascript">
+                                <a href="https://www.codeschool.com/learn/javascript" target="_blank">
                                     <h4 class="course-title">JavaScript Path</h4>
                                 </a>
                                 <p class="course-description">Spend some time with this powerful scripting language and learn to build lightweight applications with enhanced user interfaces.</p>
@@ -92,12 +92,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com">CodeSchool.com</a>
+                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com" target="_blank">CodeSchool.com</a>
                 </div>
             </div>
         </div>
         <div class="bordered-box">
-            <p class="tech-header" style="margin-top: 40px;">These are some additional technologies inside <a href="http://{{url}}">{{url}}:</a>
+            <p class="tech-header" style="margin-top: 40px;">These are some additional courses to learn about technologies inside <a href="http://{{url}}" target="_blank">{{url}}:</a>
             </p>
             <div class="bordered-box" ng-repeat='(category, courses) in lessons'>
                 <div class="panel panel-group panel-success">
@@ -106,7 +106,7 @@
                         <div class="panel-body" ng-if="$index < 5">
                             <div class="content">
                                 <div class="content-inner">
-                                    <a href="http://www.pluralsight.com{{course.course_link}}">
+                                    <a href="http://www.pluralsight.com{{course.course_link}}" target="_blank">
                                         <h4 class="course-title">{{course.course_title}}</h4>
                                     </a>
                                     <h4>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer panel-success">Powered by <a href="http://pluralsight.com">Pluralsight.com</a>
+                    <div class="panel-footer panel-success">Powered by <a href="http://pluralsight.com" target="_blank">Pluralsight.com</a>
                     </div>
                 </div>
             </div>
