@@ -5,9 +5,41 @@
     <div class="large-12  columns landing-page-search">
         <div id="wrap">
             <form autocomplete="on" ng-submit="enterSearchTerm(url); url='';">
-                <input ng-model="url" type="text" placeholder="Insert a website URL and hit enter" autofocus>
+                <input ng-model="url" type="text" placeholder="Enter a website URL and hit enter" autofocus>
                 <input value="Search" type="submit">
             </form>
         </div>
     </div>
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div id="aboutAppModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">A Note from Ashmina</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Dear Builder-to-be,</p>
+                    <p>We built this app to help people discover how simple it is to get started in building websites and apps.</p>
+                    <p>There is a wealth of information out there to help anyone get started, but it's all about knowing that the barriers aren't so great or intimidating.</p>
+                    <p>If we can do it, anyone can.</p>
+                    <p>Sincerely, </p>
+                    <p>Amina T & Ashley B
+                        <br> ashminahacks@gmail.com
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="color: white;     margin-top: 14em;
+    margin-left:8em">
+        Powered by <a href="http://codeschool.com">CodeSchool.com</a>
+        <a href="http://Pluralsight.com">Pluralsight.com</a>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#aboutAppModal" style="margin-left: 3em;">About This App</button>
+    </footer>
 </div>

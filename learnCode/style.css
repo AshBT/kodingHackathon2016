@@ -28,6 +28,11 @@ body {
     /*background: center center fixed;*/
 }
 
+footer a {
+    color:white;
+    text-decoration:none;
+}
+
 .dontShowBackgroundImage {
     background-image: url("./images/splash-kids.png");
     background-color: white;
@@ -59,14 +64,20 @@ body {
 }
 
 .landing-page-search {
+    margin-top: 2em;
     text-align: right;
-    margin-right: 18%;
+    margin-right: 20%;
 }
 
 .code-category {
     font-family: medLato;
     font-size: x-large;
     font-weight: bolder;
+}
+
+.modal-content {
+    font-family:medLato;
+    font-size:medium;
 }
 
 .course-title {
@@ -105,7 +116,10 @@ body {
 
 a {
     color: #07c569;
-    border-bottom: 1px solid #ffffff;
+}
+
+a:hover {
+    color: #05944f;
 }
 
 #wrap {
@@ -123,7 +137,7 @@ input[type="text"] {
     height: 60px;
     font-size: 26px;
     display: inline-block;
-    font-family: codeLight;
+    font-family: medLato;
     font-weight: 100;
     border: none;
     outline: none;
