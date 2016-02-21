@@ -26,3 +26,4 @@ meteorhacks:async
 okgrow:promise
 mrt:q
 mrt:modernizr-meteor
+twbs:bootstrap

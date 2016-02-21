@@ -8,6 +8,11 @@
     src: url("./font/CODE Light.otf");
 }
 
+@font-face {
+    font-family: medLato;
+    src: url("./font/Lato-Medium.ttf");
+}
+
 body {
     margin: 0;
     /*    background-image: url("./images/splash-kids.png");
@@ -48,14 +53,51 @@ body {
     font-size: 3em;
 }
 
+.tech-header {
+    font-size: x-large;
+    font-family: medLato;
+}
+
 .landing-page-search {
     text-align: right;
-    margin-right: 29%;
+    margin-right: 18%;
+}
+
+.code-category {
+    font-family: medLato;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.course-title {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.panel-header {
+    background-color: #CFF6BE !important;
+    color: #2B412C !important;
+}
+
+.course-description {
+    font-size: larger;
+}
+
+.bordered-box {
+    margin-bottom: -6px !important;
+    border-radius: 0px !important;
+}
+
+.tech-margins {
+    /*margin-left: 10em;*/
+    margin-top: 4em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .results-header {
     margin-top: 1.5em;
-    font-family: code;
+    font-family: medLato;
     font-size: -webkit-xxx-large;
     text-align: center;
     color: #07c569;

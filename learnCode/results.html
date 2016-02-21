@@ -2,70 +2,148 @@
 
 </header> -->
 <div ng-if="!valid">
-    <h2>
-        <a href="http://{{url}}">{{url}}</a> is built with proprietary technologies which are still based on HTML/CSS and Javascript.<br>
-    </h2>
-    <p>
-        Best way to build <a href="http://{{url}}">{{url}}</a>? Start with these foundational courses!
-    </p>
+    <h1 class="results-header" style="font-family: medLato;">
+        <a href="http://{{url}}">{{url}}</a> is built with proprietary technologies including HTML, CSS and Javascript.
+    </h1>
+    <div class="tech-margins">
+        <p class="tech-header">
+            Best way to build <a href="http://{{url}}">{{url}}</a>? Start by learning these foundational skills!
+        </p>
+        <div class="bordered-box">
+            <div class="panel panel-group panel-success">
+                <div class="panel-heading code-category panel-header">HTML/CSS and Javascript Skills</div>
+                <div class="panel panel-default bordered-box">
+                    <div class="panel-body">
+                        <div class="content">
+                            <div class="content-inner">
+                                <a href="https://www.codeschool.com/learn/html-css">
+                                    <h4 class="course-title">HTML/CSS Path</h4>
+                                </a>
+                                <p class="course-description">Learn the fundamentals of design, front-end development, and crafting user experiences that are easy on the eyes.</p>
+                                <h4>
+                                    <strong>Level:</strong> Beginner |
+                                    <strong>Duration:</strong> 1 Week
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default bordered-box">
+                    <div class="panel-body">
+                        <div class="content">
+                            <div class="content-inner">
+                                <a href="https://www.codeschool.com/learn/javascript">
+                                    <h4 class="course-title">JavaScript Path</h4>
+                                </a>
+                                <p class="course-description">Spend some time with this powerful scripting language and learn to build lightweight applications with enhanced user interfaces.</p>
+                                <h4>
+                                    <strong>Level:</strong> Beginner |
+                                    <strong>Duration:</strong> 2 Weeks
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com">CodeSchool.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div ng-if="valid">
     <h1 class="results-header">Learn How to Build
         <a href="http://{{url}}">{{url}}</a>
     </h1>
-    <div>
-        <p>These are the key technologies that are used to build <a href="http://{{url}}">{{url}}</a>
+    <div class="tech-margins">
+        <p class="tech-header">These are the basic skills you need to build <a href="http://{{url}}">{{url}}:</a>
         </p>
-        FOUNDATION
-        <ul class="timeline">
-            HTML/CSS and Javascript Skills
-            <li class="event">
-                <div class="thumb foundation"></div>
-                <div class="content-perspective" name="tl-group">
-                    <div class="content">
-                        <div class="content-inner">
-                            <a href="https://www.codeschool.com/learn/html-css">
-                                <h3>HTML/CSS Path @ CodeSchool</h3>
-                            </a>
-                            <p>Learn the fundamentals of design, front-end development, and crafting user experiences that are easy on the eyes.</p>
-                            <h4>Level: Beginner | Duration: 1 Week</h4>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="event">
-                <div class="thumb foundation"></div>
-                <div class="content-perspective">
-                    <div class="content">
-                        <div class="content-inner">
-                            <a href="https://www.codeschool.com/learn/javascript">
-                                <h3>JavaScript Path @ CodeSchool</h3>
-                            </a>
-                            <p>Spend some time with this powerful scripting language and learn to build lightweight applications with enhanced user interfaces.</p>
-                            <h4>Level: Beginner | Duration: 2 Weeks</h4>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        ADDITIONAL TECHNOLOGIES
-        <ul ng-repeat='(category, courses) in lessons'>
-            {{category}}
-            <div ng-repeat="course in courses track by $index">
-                <li class="event" ng-if="$index < 5">
-                    <div class="thumb elective"></div>
-                    <div class="content-perspective">
+        <div class="bordered-box">
+            <div class="panel panel-group panel-success">
+                <div class="panel-heading code-category panel-header">HTML/CSS and Javascript Skills</div>
+                <div class="panel panel-default bordered-box">
+                    <div class="panel-body">
                         <div class="content">
                             <div class="content-inner">
-                                <a href="http://www.pluralsight.com{{course.course_link}}">
-                                    <h3>{{course.course_title}}</h3>
+                                <a href="https://www.codeschool.com/learn/html-css">
+                                    <h4 class="course-title">HTML/CSS Path</h4>
                                 </a>
-                                <h4>Level: {{course.course_level}} | Duration: {{course.course_length}} | Rating: {{course.course_rating}} stars</h4>
+                                <p class="course-description">Learn the fundamentals of design, front-end development, and crafting user experiences that are easy on the eyes.</p>
+                                <h4>
+                                    <strong>Level:</strong> Beginner |
+                                    <strong>Duration:</strong> 1 Week
+                                </h4>
                             </div>
                         </div>
                     </div>
-                </li>
+                </div>
+                <div class="panel panel-default bordered-box">
+                    <div class="panel-body">
+                        <div class="content">
+                            <div class="content-inner">
+                                <a href="https://www.codeschool.com/learn/javascript">
+                                    <h4 class="course-title">JavaScript Path</h4>
+                                </a>
+                                <p class="course-description">Spend some time with this powerful scripting language and learn to build lightweight applications with enhanced user interfaces.</p>
+                                <h4>
+                                    <strong>Level:</strong> Beginner |
+                                    <strong>Duration:</strong> 2 Weeks
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer panel-success">Powered by <a href="http://codeschool.com">CodeSchool.com</a>
+                </div>
             </div>
-        </ul>
+        </div>
+        <div class="bordered-box">
+            <p class="tech-header" style="margin-top: 40px;">These are some additional technologies inside <a href="http://{{url}}">{{url}}:</a>
+            </p>
+            <div class="bordered-box" ng-repeat='(category, courses) in lessons'>
+                <div class="panel panel-group panel-success">
+                    <div class="panel-heading code-category panel-header">{{category}}</div>
+                    <div class="panel panel-default bordered-box" ng-repeat="course in courses track by $index">
+                        <div class="panel-body" ng-if="$index < 5">
+                            <div class="content">
+                                <div class="content-inner">
+                                    <a href="http://www.pluralsight.com{{course.course_link}}">
+                                        <h4 class="course-title">{{course.course_title}}</h4>
+                                    </a>
+                                    <h4>
+                                    <strong>Level:</strong> {{course.course_level}} |
+                                    <strong>Duration:</strong> {{course.course_length}}
+                                </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer panel-success">Powered by <a href="http://pluralsight.com">Pluralsight.com</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div>
+                ADDITIONAL SKILLS
+            </div>
+            <ul ng-repeat='(category, courses) in lessons'>
+                <div class="code-category">
+                    {{category}}
+                </div>
+                <div ng-repeat="course in courses track by $index">
+                    <li class="event" ng-if="$index < 5">
+                        <div class="thumb elective"></div>
+                        <div class="content-perspective">
+                            <div class="content">
+                                <div class="content-inner">
+                                    <a href="http://www.pluralsight.com{{course.course_link}}">
+                                        <h3>{{course.course_title}}</h3>
+                                    </a>
+                                    <h4>Level: {{course.course_level}} | Duration: {{course.course_length}} | Rating: {{course.course_rating}} stars</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul> -->
+        </div>
     </div>
 </div>
