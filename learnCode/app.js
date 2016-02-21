@@ -16,7 +16,7 @@ if (Meteor.isClient) {
                     controller: 'landingPageCtrl'
                 })
                 .state('lessons', {
-                    url: '/lessons/:url',
+                    url: '/learnToBuild/:url',
                     controller: 'searchTechCtrl',
                     templateUrl: 'results.html',
                     resolve: {
@@ -34,24 +34,76 @@ if (Meteor.isClient) {
     angular.module('learn-to-code').controller('landingPageCtrl', ['$scope', '$state', '$meteor',
         function($scope, $state, $meteor) {
 
+            document.body.className = "dontShowBackgroundImage";
             $scope.searchPage = true;
 
             $scope.enterSearchTerm = function(url) {
+
+                var url = url.replace('https://', '');
+                var url = url.replace('http://', '');
+
                 $state.go('lessons', { 'url': url });
             };
         }
     ]);
 
-    angular.module('learn-to-code').controller('searchTechCtrl', ['$scope', '$meteor', 'lessons',
-        function($scope, $meteor, lessons) {
+    angular.module('learn-to-code').controller('searchTechCtrl', ['$scope', '$meteor', 'lessons', '$stateParams',
+        function($scope, $meteor, lessons, $stateParams) {
+
+            document.body.className = "showBackgroundImage";
+
+            console.log(lessons);
+            $scope.url = $stateParams['url'];
 
             $scope.lessons = {};
+
+            $scope.valid = false;
+
             _.forEach(lessons, function(tf, term) {
-                if (term.length >= 4) {
+
+                console.log(term);
+                var category = term;
+
+                term = term.toLowerCase();
+
+                if (term === "ruby on rails") {
+                    term = "rails";
+                }
+
+                if (term.length >= 3) {
                     var lessonsObj = Lessons.findOne({ "courseCategory": term });
-                    $scope.lessons[term] = lessonsObj;
+
+                    console.log(lessonsObj);
+
+                    if (typeof lessonsObj !== 'undefined') {
+                        var lessonsToReturn = [];
+
+                        var courses = lessonsObj['courseInfo'];
+
+                        _.forEach(courses, function(course) {
+                            if (course['course_level'] === "Beginner" || "Intermediate") {
+                                var scaler = 1;
+                                if (course['course_level'] === "Beginner") {
+                                    scaler = 3;
+                                }
+
+                                course['courseScore'] = scaler * course['course_rating'] * parseInt(course['num_ratings']);
+                                lessonsToReturn.push(course);
+                            }
+                        });
+
+                        var sortedLessons = _.sortBy(lessonsToReturn, function(o) {
+                            return o.courseScore;
+                        }).reverse();
+
+                        $scope.lessons[category] = sortedLessons;
+                        $scope.valid = true;
+                    }
                 }
             });
+
+
+            // $scope.lessons = sortedLessons;
         }
     ]);
 }
@@ -65,52 +117,42 @@ if (Meteor.isServer) {
         searchTech: function(url) {
             var searchPromise = Q.defer();
 
-            var options = {
-                url: url,
-                debug: true,
-            };
-            var result = {};
+            var searches = ['http://', 'https://'];
 
-            wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-                var appCount = {};
-                _.forEach(apps, function(app) {
-                    var terms = app.split(" ");
-                    _.forEach(terms, function(term) {
-                        var term = term.toLowerCase();
-                        if (term.length >= 4) {
-                            appCount[term] = true;
+            for (var index in searches) {
+                var search = searches[index];
+
+                var urlToSearch = search + url;
+                console.log(urlToSearch);
+
+                var options = {
+                    url: urlToSearch,
+                    debug: true,
+                };
+
+                wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
+                    console.log(err);
+                    console.log(apps);
+                    console.log(appInfo);
+
+                    if (typeof appInfo !== "undefined") {
+                        if (_.keys(appInfo).length > 0) {
+                            console.log('resolve');
+                            searchPromise.resolve(appInfo);
+                        } else {
+                            searchPromise.resolve({});
                         }
-                    });
-                });
-
-                var appCounter = _.keys(appCount).length;
-
-                console.log(appCounter);
-                var resolve = false;
-
-                var appTerms = {};
-                _.forEach(apps, function(app) {
-                    var terms = app.split(" ");
-                    _.forEach(terms, function(term) {
-                        var term = term.toLowerCase();
-                        if (term.length >= 4) {
-                            appTerms[term] = true;
-                        }
-                    });
-
-                    console.log(appTerms);
-                    console.log(appCount);
-
-                    if (_.keys(appTerms).length === _.keys(appCount).length) {
-                        if (resolve == false) {
-                            searchPromise.resolve(appTerms);
-                            resolve = true;
+                    } else {
+                        if (search === 'https://') {
+                            console.log('didnt resolve');
+                            searchPromise.resolve({});
                         }
                     }
-                });
-            });
 
-            return searchPromise.promise;
+                });
+
+                return searchPromise.promise;
+            }
         }
     });
 }
