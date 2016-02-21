@@ -47,8 +47,10 @@ if (Meteor.isClient) {
 
             $scope.lessons = {};
             _.forEach(lessons, function(tf, term) {
-                var lessonsObj = Lessons.findOne({ "courseCategory": term });
-                $scope.lessons[term] = lessonsObj;
+                if (term.length >= 4) {
+                    var lessonsObj = Lessons.findOne({ "courseCategory": term });
+                    $scope.lessons[term] = lessonsObj;
+                }
             });
         }
     ]);
@@ -70,23 +72,40 @@ if (Meteor.isServer) {
             var result = {};
 
             wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-                var appCount = 0;
+                var appCount = {};
                 _.forEach(apps, function(app) {
                     var terms = app.split(" ");
                     _.forEach(terms, function(term) {
-                        appCount ++;
+                        var term = term.toLowerCase();
+                        if (term.length >= 4) {
+                            appCount[term] = true;
+                        }
                     });
                 });
+
+                var appCounter = _.keys(appCount).length;
+
+                console.log(appCounter);
+                var resolve = false;
 
                 var appTerms = {};
                 _.forEach(apps, function(app) {
                     var terms = app.split(" ");
                     _.forEach(terms, function(term) {
                         var term = term.toLowerCase();
-                        appTerms[term] = true;
+                        if (term.length >= 4) {
+                            appTerms[term] = true;
+                        }
                     });
-                    if (_.keys(appTerms).length === appCount) {
-                        searchPromise.resolve(appTerms);
+
+                    console.log(appTerms);
+                    console.log(appCount);
+
+                    if (_.keys(appTerms).length === _.keys(appCount).length) {
+                        if (resolve == false) {
+                            searchPromise.resolve(appTerms);
+                            resolve = true;
+                        }
                     }
                 });
             });
