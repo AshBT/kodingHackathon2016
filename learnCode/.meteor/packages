@@ -25,3 +25,4 @@ angularui:angular-ui-router
 meteorhacks:async
 okgrow:promise
 mrt:q
+mrt:modernizr-meteor

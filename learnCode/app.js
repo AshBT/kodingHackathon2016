@@ -10,32 +10,46 @@ if (Meteor.isClient) {
             $locationProvider.html5Mode(true);
 
             $stateProvider
-                .state('search', {
-                    url: '/search',
-                    templateUrl: 'search-tech.html',
-                    controller: 'searchTechCtrl'
-                }).state('lessons', {
-                    url: '/lessons',
-                    template: '<lessons></lessons>'
+                .state('landingPage', {
+                    url: '/',
+                    templateUrl: 'landing-page.html',
+                    controller: 'landingPageCtrl'
+                })
+                .state('lessons', {
+                    url: '/lessons/:url',
+                    controller: 'searchTechCtrl',
+                    templateUrl: 'results.html',
+                    resolve: {
+                        lessons: function($stateParams) {
+                            var url = $stateParams['url'];
+                            return Meteor.promise('searchTech', url);
+                        }
+                    }
                 });
 
-            $urlRouterProvider.otherwise("/search");
+            $urlRouterProvider.otherwise("/");
         }
     ]);
 
-    angular.module('learn-to-code').controller('searchTechCtrl', ['$scope', '$meteor',
-        function($scope, $meteor) {
+    angular.module('learn-to-code').controller('landingPageCtrl', ['$scope', '$state', '$meteor',
+        function($scope, $state, $meteor) {
+
+            $scope.searchPage = true;
+
+            $scope.enterSearchTerm = function(url) {
+                $state.go('lessons', { 'url': url });
+            };
+        }
+    ]);
+
+    angular.module('learn-to-code').controller('searchTechCtrl', ['$scope', '$meteor', 'lessons',
+        function($scope, $meteor, lessons) {
 
             $scope.lessons = {};
-
-            $scope.searchTech = function(url) {
-                Meteor.promise('searchTech', url).then(function(result) {
-                    _.forEach(result, function(tf, term) {
-                        var lessonsObj = Lessons.findOne({ "courseCategory": term });
-                        $scope.lessons[term] = lessonsObj;
-                    });
-                });
-            };
+            _.forEach(lessons, function(tf, term) {
+                var lessonsObj = Lessons.findOne({ "courseCategory": term });
+                $scope.lessons[term] = lessonsObj;
+            });
         }
     ]);
 }
@@ -44,12 +58,6 @@ if (Meteor.isServer) {
     Meteor.startup(function() {
         wappalyzer = Meteor.npmRequire('wappalyzer');
     });
-
-    // function urlGetter(url) {
-
-    // }
-
-    // var wrappedUrlGetter = Async.wrap(urlGetter);
 
     Meteor.methods({
         searchTech: function(url) {
@@ -60,8 +68,16 @@ if (Meteor.isServer) {
                 debug: true,
             };
             var result = {};
-            // console.log(options);
+
             wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
+                var appCount = 0;
+                _.forEach(apps, function(app) {
+                    var terms = app.split(" ");
+                    _.forEach(terms, function(term) {
+                        appCount ++;
+                    });
+                });
+
                 var appTerms = {};
                 _.forEach(apps, function(app) {
                     var terms = app.split(" ");
@@ -69,15 +85,13 @@ if (Meteor.isServer) {
                         var term = term.toLowerCase();
                         appTerms[term] = true;
                     });
+                    if (_.keys(appTerms).length === appCount) {
+                        searchPromise.resolve(appTerms);
+                    }
                 });
-
-                console.log('app terms', appTerms);
-                searchPromise.resolve(appTerms);
             });
 
             return searchPromise.promise;
-            // console.log('methods response', response);
-            // return response;
         }
     });
 }
