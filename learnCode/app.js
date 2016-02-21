@@ -26,18 +26,14 @@ if (Meteor.isClient) {
     angular.module('learn-to-code').controller('searchTechCtrl', ['$scope', '$meteor',
         function($scope, $meteor) {
 
-            $scope.lessons = $meteor.collection(Lessons);
-
-            $scope.results = [];
+            $scope.lessons = {};
 
             $scope.searchTech = function(url) {
-                Meteor.call('searchTech', url, function(results) {
-                    console.log(results);
-                    if ('apps' in results) {
-                        _.forEach(results['apps'], function(app) {
-                            $scope.results.push(app);
-                        });
-                    }
+                Meteor.promise('searchTech', url).then(function(result) {
+                    _.forEach(result, function(tf, term) {
+                        var lessonsObj = Lessons.findOne({ "courseCategory": term });
+                        $scope.lessons[term] = lessonsObj;
+                    });
                 });
             };
         }
@@ -49,21 +45,39 @@ if (Meteor.isServer) {
         wappalyzer = Meteor.npmRequire('wappalyzer');
     });
 
+    // function urlGetter(url) {
+
+    // }
+
+    // var wrappedUrlGetter = Async.wrap(urlGetter);
+
     Meteor.methods({
         searchTech: function(url) {
+            var searchPromise = Q.defer();
+
             var options = {
                 url: url,
                 debug: true,
             };
             var result = {};
-            console.log(options);
+            // console.log(options);
             wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-                console.log(apps);
-                console.log(appInfo);
-                result['apps'] = apps;
-                result['appInfo'] = appInfo;
-                return result;
+                var appTerms = {};
+                _.forEach(apps, function(app) {
+                    var terms = app.split(" ");
+                    _.forEach(terms, function(term) {
+                        var term = term.toLowerCase();
+                        appTerms[term] = true;
+                    });
+                });
+
+                console.log('app terms', appTerms);
+                searchPromise.resolve(appTerms);
             });
+
+            return searchPromise.promise;
+            // console.log('methods response', response);
+            // return response;
         }
     });
 }
