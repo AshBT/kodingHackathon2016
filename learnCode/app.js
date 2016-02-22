@@ -43,6 +43,7 @@ if (Meteor.isClient) {
                 var url = url.replace('http://', '');
 
                 $state.go('lessons', { 'url': url });
+                $scope.loading = true;
             };
         }
     ]);

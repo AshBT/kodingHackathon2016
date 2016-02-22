@@ -4,15 +4,18 @@
     </header>
     <div class="large-12  columns landing-page-search">
         <div id="wrap">
-            <form autocomplete="on" ng-submit="enterSearchTerm(url); url='';">
+            <form autocomplete="on" ng-submit="enterSearchTerm(url);">
                 <input ng-model="url" type="text" placeholder="Enter a website URL and hit enter" autofocus>
                 <input value="Search" type="submit">
             </form>
         </div>
+        <br>
+        <br>
     </div>
+             <img id="mySpinner" src="./images/spinner.gif" ng-show="loading" style="z-index: 10000; margin-left:22em; position:absolute; display:block"/>
     <!-- Trigger the modal with a button -->
     <!-- Modal -->
-    <div id="aboutAppModal" class="modal fade" role="dialog" style="margin-top: 10em;">
+    <div id="aboutAppModal" class="modal fade" role="dialog" style="margin-top: 4em;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
